@@ -2,30 +2,53 @@ public class Main {
     public static void main(String[] args) {
 
         Banco banco = new Banco();
-        ClientePessoaFisica phellipe = new ClientePessoaFisica("Phellipe", "999.999.999.99");
-        ClientePessoaJuridica phellipePJ = new ClientePessoaJuridica("Phellipe", "99.999.999/0001-99");
-        ClientePessoaFisica pedro = new ClientePessoaFisica("Pedro", "222.222.222.22");
+        banco.setNome("Banco Virtual DIO");
 
-        System.out.println(banco.buscarContasPorCliente(phellipe));
+        ClientePessoaFisica phellipe = new ClientePessoaFisica("Phellipe", "999.999.999-99");
+        ClientePessoaFisica pedro = new ClientePessoaFisica("Pedro", "222.222.222-22");
+        ClientePessoaJuridica empresa = new ClientePessoaJuridica("Empresa XYZ", "99.999.999/0001-99");
 
-        Conta cc = banco.criarContaCorrente(phellipe);
-        Conta cp = banco.criarContaPoupanca(phellipe);
+        Conta contaCorrentePhellipe = banco.criarContaCorrente(phellipe);
+        Conta contaPoupancaPhellipe = banco.criarContaPoupanca(phellipe);
 
-        System.out.println(banco.buscarContasPorCliente(phellipe));
+        Conta contaCorrentePedro = banco.criarContaCorrente(pedro);
+        Conta contaPoupancaPedro = banco.criarContaPoupanca(pedro);
 
-//        cc.depositar(100);
-//        Conta cp = banco.criarContaPoupanca(phellipe);
-//        cc.transferir(100, cp);
-//        Conta cp2 = banco.criarContaPoupanca(pedro);
-//        Conta cp3 = banco.criarContaCorrente(phellipePJ);
-//
-//        cp.sacar(55);
-//
-//        cc.imprimirExtrato();
-//        cp.imprimirExtrato();
-//        cp2.imprimirExtrato();
-//        cp3.imprimirExtrato();
+        Conta contaCorrenteEmpresa = banco.criarContaCorrente(empresa);
+
+        // DEVERIA FALHAR.
+        try {
+            Conta contaPoupancaEmpresa = banco.criarContaPoupanca(empresa);
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro ao criar conta poupança para PJ: " + e.getMessage());
+        }
+
+        contaCorrentePhellipe.depositar(500);
+        contaCorrentePhellipe.transferir(150, contaPoupancaPhellipe);
+        contaPoupancaPhellipe.sacar(55);
+
+        contaCorrentePedro.depositar(300);
+        contaCorrentePedro.transferir(100, contaPoupancaPedro);
+        contaPoupancaPedro.sacar(50);
+
+        contaCorrenteEmpresa.depositar(1000);
+        contaCorrenteEmpresa.transferir(250, contaCorrentePhellipe);
+
+        contaCorrentePhellipe.imprimirExtrato();
+        contaPoupancaPhellipe.imprimirExtrato();
+        contaCorrentePedro.imprimirExtrato();
+        contaPoupancaPedro.imprimirExtrato();
+        contaCorrenteEmpresa.imprimirExtrato();
 
         banco.listarClientes();
+
+        System.out.println("\nContas de Phellipe:");
+        banco.buscarContasPorCliente(phellipe).forEach(System.out::println);
+
+        System.out.println("\nContas de Pedro:");
+        banco.buscarContasPorCliente(pedro).forEach(System.out::println);
+
+        System.out.println("\nContas da Empresa:");
+        banco.buscarContasPorCliente(empresa).forEach(System.out::println);
     }
 }

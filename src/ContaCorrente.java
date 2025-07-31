@@ -6,9 +6,10 @@ public final class ContaCorrente extends Conta{
 
     @Override
     public void imprimirExtrato() {
-        System.out.println("=== Extrato Conta Corrente ===");
+        System.out.println("================================= Extrato Conta Corrente  =================================");
         imprimirInfosComuns();
-        System.out.println("==============================\n");
+        imprimirTransacoes();
+        System.out.println("===========================================================================================\n");
     }
 
     @Override
@@ -18,10 +19,8 @@ public final class ContaCorrente extends Conta{
 
     @Override
     public String toString() {
-        return "ContaCorrente{" +
-                "agencia=" + agencia +
-                ", numero=" + numero +
-                ", cliente=" + cliente +
-                '}';
+        return String.format("%s {Agência: %d, Número: %d, Cliente: %s}",
+                getTipo(), agencia, numero, cliente.getNome());
     }
+
 }

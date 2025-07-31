@@ -6,9 +6,10 @@ public final class ContaPoupanca extends Conta {
 
     @Override
     public void imprimirExtrato() {
-        System.out.println("=== Extrato Conta Poupança ===");
+        System.out.println("================================= Extrato Conta Poupança  =================================");
         imprimirInfosComuns();
-        System.out.println("==============================\n");
+        imprimirTransacoes();
+        System.out.println("===========================================================================================\n");
     }
 
     @Override
@@ -18,11 +19,9 @@ public final class ContaPoupanca extends Conta {
 
     @Override
     public String toString() {
-        return "ContaPoupanca{" +
-                "agencia=" + agencia +
-                ", numero=" + numero +
-                ", cliente=" + cliente +
-                '}';
+        return String.format("%s {Agência: %d, Número: %d, Cliente: %s}",
+                getTipo(), agencia, numero, cliente.getNome());
     }
+
 }
 
