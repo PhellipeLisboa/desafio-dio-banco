@@ -1,6 +1,6 @@
-public class Cliente {
+public abstract sealed class Cliente permits ClientePessoaFisica, ClientePessoaJuridica {
 
-    private String nome;
+    protected String nome;
 
     public Cliente(String nome) {
         this.nome = nome;
@@ -10,6 +10,8 @@ public class Cliente {
         return nome;
     }
 
+    public abstract boolean podeTerContaPoupanca();
+
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -18,4 +20,6 @@ public class Cliente {
     public String toString() {
         return nome;
     }
+
+    public abstract String getTipo();
 }

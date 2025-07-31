@@ -1,4 +1,4 @@
-public class ContaCorrente extends Conta{
+public final class ContaCorrente extends Conta{
 
     public ContaCorrente(Cliente cliente) {
         super(cliente);
@@ -11,4 +11,17 @@ public class ContaCorrente extends Conta{
         System.out.println("==============================\n");
     }
 
+    @Override
+    public String getTipo() {
+        return "Conta Corrente";
+    }
+
+    @Override
+    public String toString() {
+        return "ContaCorrente{" +
+                "agencia=" + agencia +
+                ", numero=" + numero +
+                ", cliente=" + cliente +
+                '}';
+    }
 }

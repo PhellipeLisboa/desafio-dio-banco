@@ -1,4 +1,4 @@
-public abstract class Conta implements IConta {
+public abstract sealed class Conta implements IConta permits ContaPoupanca, ContaCorrente {
 
     private static final int AGENCIA_PADRAO = 1;
     private static int SEQUENCIAL = 1;
@@ -49,8 +49,12 @@ public abstract class Conta implements IConta {
 
     protected void imprimirInfosComuns() {
         System.out.printf("Titular: %s \n", this.cliente.getNome());
+        System.out.printf("Tipo de conta: %s \n", this.cliente.getTipo());
         System.out.printf("Agência: %d \n", this.agencia);
         System.out.printf("Número: %d \n", this.numero);
         System.out.printf("Saldo: R$ %.2f \n", this.saldo);
     }
+
+
+    public abstract String getTipo();
 }

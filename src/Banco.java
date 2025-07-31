@@ -11,25 +11,41 @@ public class Banco {
     }
 
     public Conta criarContaCorrente(Cliente cliente) {
-        Conta novaConta = new ContaCorrente(cliente);
+        ContaCorrente novaConta = new ContaCorrente(cliente);
         this.contas.add(novaConta);
         return novaConta;
     }
 
     public Conta criarContaPoupanca(Cliente cliente) {
-        Conta novaConta = new ContaPoupanca(cliente);
+
+        if (!cliente.podeTerContaPoupanca()) {
+            throw new IllegalArgumentException("Apenas clientes do tipo pessoa física podem ter conta poupança.");
+        }
+
+        ContaPoupanca novaConta = new ContaPoupanca(cliente);
+
         this.contas.add(novaConta);
         return novaConta;
     }
 
     public void listarClientes() {
 
-        List<Cliente> clientes = new ArrayList<>();
-        for (Conta conta : contas) {
-            clientes.add(conta.getCliente());
-        }
-        System.out.println("Clientes: " + clientes);
+        System.out.println("============================= Lista de Clientes =============================");
 
+        contas.stream().map(conta -> String.format("Titular: %-20s | Tipo Cliente: %-2s | Tipo Conta: %s",
+                conta.cliente.getNome(),
+                conta.cliente.getTipo(),
+                conta.getTipo()))
+                .distinct().forEach(System.out::println);
+
+        System.out.println("=============================================================================");
+
+    }
+
+    public List<Conta> buscarContasPorCliente(Cliente cliente) {
+        return contas.stream()
+                .filter(conta -> conta.getCliente().equals(cliente))
+                .toList();
     }
 
     public String getNome() {
