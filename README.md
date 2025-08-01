@@ -7,12 +7,12 @@ O objetivo era simular um **banco digital**, utilizando conceitos de Programaç�
 
 ## Funcionalidades implementadas
 
-✅ Criação de clientes (Pessoa Física e Pessoa Jurídica). 
-✅ Abertura de contas (Corrente e Poupança).
+✅ Criação de clientes (Pessoa Física e Pessoa Jurídica).  
+✅ Abertura de contas (Corrente e Poupança).  
 ✅ Depósito, saque e transferência entre contas.  
 ✅ Registro automático de transações.  
-✅ Impressão de extrato com histórico.
-✅ Busca de contas por cliente.
+✅ Impressão de extrato com histórico.  
+✅ Busca de contas por cliente.  
 ✅ Listagem de todos os clientes do banco.
 
 ---
